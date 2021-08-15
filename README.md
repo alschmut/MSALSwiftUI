@@ -6,6 +6,7 @@ This projects reuses the sample code provided by Microsoft within their MSAL iOS
 
 https://github.com/Azure-Samples/ms-identity-mobile-apple-swift-objc
 
+
 ## Dependencies
 * [Resolver](https://github.com/hmlongco/Resolver) for simple dependency injection
 
@@ -17,14 +18,11 @@ To use this project with your own registered Azure App you need to change the fo
 * MSAuthCredentials.swift
 
 
-
-
 ## Roadmap
 
 I do not intend to update this project or keep it up to date. 
 Microsoft itself is likely to introduce their own Sample Project for SwiftUI soon (state August 2021).
-
-
+See issue regarding SwiftUI Sample for a similar project https://github.com/Azure-Samples/active-directory-b2c-ios-swift-native-msal/issues/47
 
 
 ## Contributing
@@ -38,20 +36,14 @@ Contributions are what make the open source community such an amazing place to l
 5. Open a Pull Request
 
 
-
-
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
 
-
-
 ## Contact
 
 Alexander Schmutz - alexander@t-schmutz.de
-
-
 
 
 ## Acknowledgements
