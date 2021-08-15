@@ -6,6 +6,8 @@ This projects reuses the sample code provided by Microsoft within their MSAL iOS
 
 https://github.com/Azure-Samples/ms-identity-mobile-apple-swift-objc
 
+**Imprortant**: I do not guarantee that this projct works 100% the same way as the MS Sample does! But I hope it gives some useful input while trying to rewrite the UIKIt sample in SwiftUI :)
+
 
 ## Dependencies
 * [Resolver](https://github.com/hmlongco/Resolver) for simple dependency injection
