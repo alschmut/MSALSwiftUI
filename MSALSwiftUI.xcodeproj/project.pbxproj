@@ -3,27 +3,42 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D8AFBD2926C95579009DD30D /* MSALSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AFBD1626C95578009DD30D /* MSALSwiftUIApp.swift */; };
-		D8AFBD2A26C95579009DD30D /* MSALSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AFBD1626C95578009DD30D /* MSALSwiftUIApp.swift */; };
-		D8AFBD2B26C95579009DD30D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AFBD1726C95578009DD30D /* ContentView.swift */; };
-		D8AFBD2C26C95579009DD30D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AFBD1726C95578009DD30D /* ContentView.swift */; };
+		D8AFBD2926C95579009DD30D /* MSALApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AFBD1626C95578009DD30D /* MSALApp.swift */; };
+		D8AFBD2A26C95579009DD30D /* MSALApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AFBD1626C95578009DD30D /* MSALApp.swift */; };
+		D8AFBD2B26C95579009DD30D /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AFBD1726C95578009DD30D /* AuthView.swift */; };
+		D8AFBD2C26C95579009DD30D /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AFBD1726C95578009DD30D /* AuthView.swift */; };
 		D8AFBD2D26C95579009DD30D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8AFBD1826C95579009DD30D /* Assets.xcassets */; };
 		D8AFBD2E26C95579009DD30D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8AFBD1826C95579009DD30D /* Assets.xcassets */; };
+		D8AFBD3926C956AE009DD30D /* MSAL in Frameworks */ = {isa = PBXBuildFile; productRef = D8AFBD3826C956AE009DD30D /* MSAL */; };
+		D8AFBD3F26C95728009DD30D /* MSAuthAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AFBD3B26C95728009DD30D /* MSAuthAdapter.swift */; };
+		D8AFBD4026C95728009DD30D /* MSAuthAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AFBD3B26C95728009DD30D /* MSAuthAdapter.swift */; };
+		D8AFBD4126C95728009DD30D /* MSAuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AFBD3C26C95728009DD30D /* MSAuthState.swift */; };
+		D8AFBD4226C95728009DD30D /* MSAuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AFBD3C26C95728009DD30D /* MSAuthState.swift */; };
+		D8AFBD4426C95738009DD30D /* MSAuthCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AFBD4326C95738009DD30D /* MSAuthCredentials.swift */; };
+		D8AFBD4526C95738009DD30D /* MSAuthCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AFBD4326C95738009DD30D /* MSAuthCredentials.swift */; };
+		D8AFBD4926C959DE009DD30D /* Resolver in Frameworks */ = {isa = PBXBuildFile; productRef = D8AFBD4826C959DE009DD30D /* Resolver */; };
+		D8AFBD4B26C95A14009DD30D /* AppResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AFBD4A26C95A14009DD30D /* AppResolver.swift */; };
+		D8AFBD4C26C95A14009DD30D /* AppResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AFBD4A26C95A14009DD30D /* AppResolver.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D8AFBD1626C95578009DD30D /* MSALSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSALSwiftUIApp.swift; sourceTree = "<group>"; };
-		D8AFBD1726C95578009DD30D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D8AFBD1626C95578009DD30D /* MSALApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSALApp.swift; sourceTree = "<group>"; };
+		D8AFBD1726C95578009DD30D /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		D8AFBD1826C95579009DD30D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D8AFBD1D26C95579009DD30D /* MSALSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MSALSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8AFBD2026C95579009DD30D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8AFBD2526C95579009DD30D /* MSALSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MSALSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8AFBD2726C95579009DD30D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8AFBD2826C95579009DD30D /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		D8AFBD3B26C95728009DD30D /* MSAuthAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSAuthAdapter.swift; sourceTree = "<group>"; };
+		D8AFBD3C26C95728009DD30D /* MSAuthState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSAuthState.swift; sourceTree = "<group>"; };
+		D8AFBD4326C95738009DD30D /* MSAuthCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSAuthCredentials.swift; sourceTree = "<group>"; };
+		D8AFBD4626C95909009DD30D /* MSALSwiftUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MSALSwiftUI.entitlements; sourceTree = "<group>"; };
+		D8AFBD4A26C95A14009DD30D /* AppResolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppResolver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +46,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8AFBD4926C959DE009DD30D /* Resolver in Frameworks */,
+				D8AFBD3926C956AE009DD30D /* MSAL in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +64,7 @@
 		D8AFBD1026C95578009DD30D = {
 			isa = PBXGroup;
 			children = (
+				D8AFBD4626C95909009DD30D /* MSALSwiftUI.entitlements */,
 				D8AFBD1526C95578009DD30D /* Shared */,
 				D8AFBD1F26C95579009DD30D /* iOS */,
 				D8AFBD2626C95579009DD30D /* macOS */,
@@ -57,8 +75,12 @@
 		D8AFBD1526C95578009DD30D /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				D8AFBD1626C95578009DD30D /* MSALSwiftUIApp.swift */,
-				D8AFBD1726C95578009DD30D /* ContentView.swift */,
+				D8AFBD1626C95578009DD30D /* MSALApp.swift */,
+				D8AFBD1726C95578009DD30D /* AuthView.swift */,
+				D8AFBD3B26C95728009DD30D /* MSAuthAdapter.swift */,
+				D8AFBD3C26C95728009DD30D /* MSAuthState.swift */,
+				D8AFBD4326C95738009DD30D /* MSAuthCredentials.swift */,
+				D8AFBD4A26C95A14009DD30D /* AppResolver.swift */,
 				D8AFBD1826C95579009DD30D /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -106,6 +128,10 @@
 			dependencies = (
 			);
 			name = "MSALSwiftUI (iOS)";
+			packageProductDependencies = (
+				D8AFBD3826C956AE009DD30D /* MSAL */,
+				D8AFBD4826C959DE009DD30D /* Resolver */,
+			);
 			productName = "MSALSwiftUI (iOS)";
 			productReference = D8AFBD1D26C95579009DD30D /* MSALSwiftUI.app */;
 			productType = "com.apple.product-type.application";
@@ -153,6 +179,10 @@
 				Base,
 			);
 			mainGroup = D8AFBD1026C95578009DD30D;
+			packageReferences = (
+				D8AFBD3726C956AE009DD30D /* XCRemoteSwiftPackageReference "microsoft-authentication-library-for-objc" */,
+				D8AFBD4726C959DE009DD30D /* XCRemoteSwiftPackageReference "Resolver" */,
+			);
 			productRefGroup = D8AFBD1E26C95579009DD30D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -187,8 +217,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8AFBD2B26C95579009DD30D /* ContentView.swift in Sources */,
-				D8AFBD2926C95579009DD30D /* MSALSwiftUIApp.swift in Sources */,
+				D8AFBD4126C95728009DD30D /* MSAuthState.swift in Sources */,
+				D8AFBD2B26C95579009DD30D /* AuthView.swift in Sources */,
+				D8AFBD3F26C95728009DD30D /* MSAuthAdapter.swift in Sources */,
+				D8AFBD4B26C95A14009DD30D /* AppResolver.swift in Sources */,
+				D8AFBD4426C95738009DD30D /* MSAuthCredentials.swift in Sources */,
+				D8AFBD2926C95579009DD30D /* MSALApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,8 +230,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8AFBD2C26C95579009DD30D /* ContentView.swift in Sources */,
-				D8AFBD2A26C95579009DD30D /* MSALSwiftUIApp.swift in Sources */,
+				D8AFBD4226C95728009DD30D /* MSAuthState.swift in Sources */,
+				D8AFBD2C26C95579009DD30D /* AuthView.swift in Sources */,
+				D8AFBD4026C95728009DD30D /* MSAuthAdapter.swift in Sources */,
+				D8AFBD4C26C95A14009DD30D /* AppResolver.swift in Sources */,
+				D8AFBD4526C95738009DD30D /* MSAuthCredentials.swift in Sources */,
+				D8AFBD2A26C95579009DD30D /* MSALApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +358,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MSALSwiftUI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -328,7 +367,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.microsoft.identitysample.MSALiOS.MSALSwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.microsoft.identitysample.MSALiOS;
 				PRODUCT_NAME = MSALSwiftUI;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -341,6 +380,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MSALSwiftUI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -349,7 +389,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.microsoft.identitysample.MSALiOS.MSALSwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.microsoft.identitysample.MSALiOS;
 				PRODUCT_NAME = MSALSwiftUI;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -373,7 +413,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.microsoft.identitysample.MSALiOS.MSALSwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.microsoft.identitysample.MSALiOS;
 				PRODUCT_NAME = MSALSwiftUI;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
@@ -395,7 +435,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.microsoft.identitysample.MSALiOS.MSALSwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.microsoft.identitysample.MSALiOS;
 				PRODUCT_NAME = MSALSwiftUI;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
@@ -433,6 +473,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D8AFBD3726C956AE009DD30D /* XCRemoteSwiftPackageReference "microsoft-authentication-library-for-objc" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AzureAD/microsoft-authentication-library-for-objc";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.20;
+			};
+		};
+		D8AFBD4726C959DE009DD30D /* XCRemoteSwiftPackageReference "Resolver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Resolver";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D8AFBD3826C956AE009DD30D /* MSAL */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8AFBD3726C956AE009DD30D /* XCRemoteSwiftPackageReference "microsoft-authentication-library-for-objc" */;
+			productName = MSAL;
+		};
+		D8AFBD4826C959DE009DD30D /* Resolver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8AFBD4726C959DE009DD30D /* XCRemoteSwiftPackageReference "Resolver" */;
+			productName = Resolver;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D8AFBD1126C95578009DD30D /* Project object */;
 }
