@@ -9,15 +9,67 @@ https://github.com/Azure-Samples/ms-identity-mobile-apple-swift-objc
 **Important**: I do not guarantee that this project works 100% the same way as the MS Sample does! But I hope it gives some useful input while trying to rewrite the UIKIt sample in SwiftUI :)
 
 
-## Dependencies
-* [Resolver](https://github.com/hmlongco/Resolver) for simple dependency injection
-
 
 ## Use your own Azure App
 
 To use this project with your own registered Azure App you need to change the following:
-* Project Bundle Identifier
-* MSAuthCredentials.swift
+* Project *Bundle Identifier* (`<app_name>` -> `<your_target>` -> General -> Bundle Identifier)
+* Replace the credentials in `MSAuthCredentials.swift
+  ```
+  struct MSAuthCredentials {
+    static let applicationId = "66855f8a-60cd-445e-a9bb-8cd8eadbd3fa" // or clientID
+    static let directoryId = "common" // or tenantID
+  }
+  ```
+
+
+## Overview
+The `MSAuthAdapter` encapsulates all the MSAL APIs, which mainly stayed the same as in the above mentioned UIKit sample.
+
+```
+class MSAuthState: ObservableObject {
+    @Published var currentAccount: MSALAccount?
+    @Published var logMessage = ""
+}
+
+struct AuthView: View {
+    @EnvironmentObject var msAuthState: MSAuthState
+
+    private let msAuthAdapter: MSAuthAdapter = resolve()
+    
+    var body: some View {
+        VStack(spacing: 40) {
+            Text(msAuthState.currentAccount?.username ?? "Signed out")
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .foregroundColor(.gray)
+
+            Button("Call Microsoft Graph API") {
+                msAuthAdapter.callGraphAPI()
+            }
+
+            Button("Sign Out") {
+                msAuthAdapter.signOut()
+            }
+            .disabled(msAuthState.currentAccount == nil)
+
+            Button("Get device info") {
+                msAuthAdapter.getDeviceMode()
+            }
+            
+            Text(msAuthState.logMessage)
+                .font(.caption)
+
+            Spacer()
+        }
+        .padding()
+    }
+}
+
+```
+
+
+## Dependencies
+* [Resolver](https://github.com/hmlongco/Resolver) for simple dependency injection
 
 
 ## Roadmap
