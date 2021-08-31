@@ -15,7 +15,7 @@ https://github.com/Azure-Samples/ms-identity-mobile-apple-swift-objc
 To use this project with your own registered Azure App you need to change the following:
 * Project *Bundle Identifier* (`<app_name>` -> `<your_target>` -> General -> Bundle Identifier)
 * Replace the credentials in `MSAuthCredentials.swift
-  ```
+  ```swift
   struct MSAuthCredentials {
     static let applicationId = "66855f8a-60cd-445e-a9bb-8cd8eadbd3fa" // or clientID
     static let directoryId = "common" // or tenantID
@@ -26,7 +26,7 @@ To use this project with your own registered Azure App you need to change the fo
 ## Overview
 The `MSAuthAdapter` encapsulates all the MSAL APIs, which mainly stayed the same as in the above mentioned UIKit sample.
 
-```
+```swift
 class MSAuthState: ObservableObject {
     @Published var currentAccount: MSALAccount?
     @Published var logMessage = ""
