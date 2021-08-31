@@ -24,7 +24,7 @@ To use this project with your own registered Azure App you need to change the fo
 
 
 ## Overview
-The `MSAuthAdapter` encapsulates all the MSAL APIs, which mainly stayed the same as in the above mentioned UIKit sample.
+The [`MSAuthAdapter`](Shared/MSAuthAdapter.swift) encapsulates all the MSAL APIs, which mainly stayed the same as in the above mentioned UIKit sample.
 
 ```swift
 class MSAuthState: ObservableObject {
