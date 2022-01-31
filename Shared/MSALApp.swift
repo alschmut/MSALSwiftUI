@@ -12,18 +12,18 @@ struct MSALApp: App {
     @Environment(\.scenePhase) var scenePhase
     
     private let msAuthState: MSAuthState = resolve()
-    private let msAuthAdapter: MSAuthAdapter = resolve()
+    private let msAuthAdapter: MSAuthAdapterProtocol = resolve()
     
     var body: some Scene {
         WindowGroup {
             AuthView()
                 .onAppear {
-                    msAuthAdapter.setupMSAuthentication()
-                    msAuthAdapter.loadCurrentAccount()
+                    msAuthAdapter.setupViewConnection()
+                    msAuthAdapter.login(withInteraction: false)
                 }
                 .onChange(of: scenePhase) { scenePhase in
                     if scenePhase == .active {
-                        msAuthAdapter.loadCurrentAccount()
+                        msAuthAdapter.login(withInteraction: false)
                     }
                 }
                 .onOpenURL { url in

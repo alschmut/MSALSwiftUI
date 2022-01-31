@@ -7,8 +7,8 @@
 
 import Foundation
 
-// Update the below to your client ID you received in the portal. The below is for running the demo only
+// TODO: Update the demo credentials below to your client ID you received in the Azure portal
 struct MSAuthCredentials {
-    static let applicationId = "66855f8a-60cd-445e-a9bb-8cd8eadbd3fa" // or clientID
-    static let directoryId = "common" // or tenantID
+    static let applicationId = "66855f8a-60cd-445e-a9bb-8cd8eadbd3fa" // aka clientID
+    static let directoryId = "common" // aka tenantID
 }

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D8A5AFED27A844B600B59997 /* MSAuthProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A5AFEC27A844B600B59997 /* MSAuthProxy.swift */; };
+		D8A5AFEE27A844B600B59997 /* MSAuthProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A5AFEC27A844B600B59997 /* MSAuthProxy.swift */; };
+		D8A5AFF027A84AB400B59997 /* UIApplication+TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A5AFEF27A84AB400B59997 /* UIApplication+TopViewController.swift */; };
+		D8A5AFF127A84AB400B59997 /* UIApplication+TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A5AFEF27A84AB400B59997 /* UIApplication+TopViewController.swift */; };
+		D8A5AFF327A84ADF00B59997 /* Logger+Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A5AFF227A84ADF00B59997 /* Logger+Categories.swift */; };
+		D8A5AFF427A84ADF00B59997 /* Logger+Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A5AFF227A84ADF00B59997 /* Logger+Categories.swift */; };
 		D8AFBD2926C95579009DD30D /* MSALApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AFBD1626C95578009DD30D /* MSALApp.swift */; };
 		D8AFBD2A26C95579009DD30D /* MSALApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AFBD1626C95578009DD30D /* MSALApp.swift */; };
 		D8AFBD2B26C95579009DD30D /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AFBD1726C95578009DD30D /* AuthView.swift */; };
@@ -26,6 +32,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D8A5AFEC27A844B600B59997 /* MSAuthProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSAuthProxy.swift; sourceTree = "<group>"; };
+		D8A5AFEF27A84AB400B59997 /* UIApplication+TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+TopViewController.swift"; sourceTree = "<group>"; };
+		D8A5AFF227A84ADF00B59997 /* Logger+Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+Categories.swift"; sourceTree = "<group>"; };
 		D8AFBD1626C95578009DD30D /* MSALApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSALApp.swift; sourceTree = "<group>"; };
 		D8AFBD1726C95578009DD30D /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		D8AFBD1826C95579009DD30D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -78,9 +87,12 @@
 				D8AFBD1626C95578009DD30D /* MSALApp.swift */,
 				D8AFBD1726C95578009DD30D /* AuthView.swift */,
 				D8AFBD3B26C95728009DD30D /* MSAuthAdapter.swift */,
+				D8A5AFEC27A844B600B59997 /* MSAuthProxy.swift */,
 				D8AFBD3C26C95728009DD30D /* MSAuthState.swift */,
 				D8AFBD4326C95738009DD30D /* MSAuthCredentials.swift */,
 				D8AFBD4A26C95A14009DD30D /* AppResolver.swift */,
+				D8A5AFEF27A84AB400B59997 /* UIApplication+TopViewController.swift */,
+				D8A5AFF227A84ADF00B59997 /* Logger+Categories.swift */,
 				D8AFBD1826C95579009DD30D /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -218,11 +230,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8AFBD4126C95728009DD30D /* MSAuthState.swift in Sources */,
+				D8A5AFED27A844B600B59997 /* MSAuthProxy.swift in Sources */,
 				D8AFBD2B26C95579009DD30D /* AuthView.swift in Sources */,
 				D8AFBD3F26C95728009DD30D /* MSAuthAdapter.swift in Sources */,
 				D8AFBD4B26C95A14009DD30D /* AppResolver.swift in Sources */,
 				D8AFBD4426C95738009DD30D /* MSAuthCredentials.swift in Sources */,
 				D8AFBD2926C95579009DD30D /* MSALApp.swift in Sources */,
+				D8A5AFF027A84AB400B59997 /* UIApplication+TopViewController.swift in Sources */,
+				D8A5AFF327A84ADF00B59997 /* Logger+Categories.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,11 +246,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8AFBD4226C95728009DD30D /* MSAuthState.swift in Sources */,
+				D8A5AFEE27A844B600B59997 /* MSAuthProxy.swift in Sources */,
 				D8AFBD2C26C95579009DD30D /* AuthView.swift in Sources */,
 				D8AFBD4026C95728009DD30D /* MSAuthAdapter.swift in Sources */,
 				D8AFBD4C26C95A14009DD30D /* AppResolver.swift in Sources */,
 				D8AFBD4526C95738009DD30D /* MSAuthCredentials.swift in Sources */,
 				D8AFBD2A26C95579009DD30D /* MSALApp.swift in Sources */,
+				D8A5AFF127A84AB400B59997 /* UIApplication+TopViewController.swift in Sources */,
+				D8A5AFF427A84ADF00B59997 /* Logger+Categories.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

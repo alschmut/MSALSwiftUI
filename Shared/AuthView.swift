@@ -10,28 +10,28 @@ import SwiftUI
 struct AuthView: View {
     @EnvironmentObject var msAuthState: MSAuthState
 
-    private let msAuthAdapter: MSAuthAdapter = resolve()
+    private let msAuthAdapter: MSAuthAdapterProtocol = resolve()
     
     var body: some View {
         VStack(spacing: 40) {
-            Text(msAuthState.currentAccount?.username ?? "Signed out")
+            Text(msAuthState.account?.email ?? "Signed out")
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .foregroundColor(.gray)
 
-            Button("Call Microsoft Graph API") {
-                msAuthAdapter.callGraphAPI()
+            Button("Login with interaction") {
+                msAuthAdapter.login(withInteraction: true)
             }
 
-            Button("Sign Out") {
-                msAuthAdapter.signOut()
+            Button("Logout") {
+                msAuthAdapter.logout()
             }
-            .disabled(msAuthState.currentAccount == nil)
+            .disabled(msAuthState.account == nil)
 
-            Button("Get device info") {
-                msAuthAdapter.getDeviceMode()
+            Button("Load device mode") {
+                msAuthAdapter.loadDeviceMode()
             }
             
-            Text(msAuthState.logMessage)
+            Text("See logged console output for more info")
                 .font(.caption)
 
             Spacer()

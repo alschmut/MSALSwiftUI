@@ -8,223 +8,190 @@
 // All rights reserved.
 //
 
+import UIKit
+import OSLog
 
-import Foundation
-import MSAL
-import os.log
+protocol MSAuthAdapterProtocol {
+    func setupViewConnection()
+    func login(withInteraction: Bool)
+    func logout()
+    func openUrl(url: URL)
+    func loadDeviceMode()
+}
 
-class MSAuthAdapter {
-    
-    private let msGraphEndpoint = "https://graph.microsoft.com/v1.0/me/"
+class MSAuthAdapter: MSAuthAdapterProtocol {
+
+    private let msGraphEndpoint = "https://graph.microsoft.com"
     private let msAuthority: String = "https://login.microsoftonline.com/\(MSAuthCredentials.directoryId)"
     private let msRedirectUri = "msauth.\(Bundle.main.bundleIdentifier!)://auth"
     private let msScopes: [String] = ["User.Read"]
-
-    private let msAuthState: MSAuthState = resolve()
-
-    private var accessToken = ""
-    private var applicationContext: MSALPublicClientApplication?
-    private var webViewParamaters: MSALWebviewParameters?
-
-    init() {
-        guard let authorityURL = URL(string: msAuthority) else {
-            msAuthState.logMessage = "Unable to create authority URL"
-            return
-        }
-
-        do {
-            let authority = try MSALAADAuthority(url: authorityURL)
-            let msalConfiguration = MSALPublicClientApplicationConfig(
-                clientId: MSAuthCredentials.applicationId,
-                redirectUri: msRedirectUri,
-                authority: authority
-            )
-
-            applicationContext = try MSALPublicClientApplication(configuration: msalConfiguration)
-        } catch let error {
-            msAuthState.logMessage = "Unable to create Application Context \(error)"
-        }
+    
+    private let appState: MSAuthState
+    private let msAuthProxy: MSAuthProxyProtocol
+    
+    private var accessToken: String? // TODO: Use keychain to store accessToken
+    
+    init(
+        appState: MSAuthState = resolve(),
+        msAuthProxy: MSAuthProxyProtocol = resolve()
+    ) {
+        self.appState = appState
+        self.msAuthProxy = msAuthProxy
+        setupApplicationContext()
     }
 
     /// needs to be called after the view was initialised so the topViewController can be found
-    func setupMSAuthentication() {
-        if let topViewController = topViewController() {
-            self.webViewParamaters = MSALWebviewParameters(authPresentationViewController: topViewController)
+    func setupViewConnection() {
+        if let topViewController = UIApplication.topViewController {
+            msAuthProxy.connectWith(viewController: topViewController)
         }
     }
 
-    func callGraphAPI() {
-        loadCurrentAccount { (account) in
-            guard let currentAccount = account else {
+    func login(withInteraction: Bool) {
+        loadAccount { account in
+            if account != nil {
+                self.acquireTokenSilently()
+            } else if withInteraction {
                 self.acquireTokenInteractively()
-                return
+            } else {
+                self.logout()
             }
-
-            self.acquireTokenSilently(currentAccount)
         }
     }
 
-    func loadCurrentAccount(completion: ((MSALAccount?) -> Void)? = nil) {
-        guard let applicationContext = applicationContext else { return }
-
-        let msalParameters = MSALParameters()
-        msalParameters.completionBlockQueue = DispatchQueue.main
-
-        applicationContext.getCurrentAccount(with: msalParameters) { (currentAccount, _, error) in
-
+    func logout() {
+        msAuthProxy.logout { error in
             if let error = error {
-                self.msAuthState.logMessage = "Couldn't query current account with error: \(error)"
+                Logger.msAuthentication.error("Couldn't sign out account with error: \(String(describing: error))")
+                self.resetState()
                 return
             }
 
-            if let currentAccount = currentAccount {
-                self.msAuthState.logMessage = "Found a signed in account \(String(describing: currentAccount.username)). Updating data for that account..."
-
-                self.msAuthState.currentAccount = currentAccount
-                completion?(currentAccount)
-                return
-            }
-
-            self.msAuthState.logMessage = "Account signed out. Updating UX"
-            self.accessToken = ""
-            self.msAuthState.currentAccount = nil
-
-            if let completion = completion {
-                completion(nil)
-            }
-        }
-    }
-
-    func signOut() {
-        guard let applicationContext = applicationContext else { return }
-        guard let account = msAuthState.currentAccount else { return }
-
-        let signoutParameters = MSALSignoutParameters(webviewParameters: webViewParamaters!)
-        signoutParameters.signoutFromBrowser = false
-
-        applicationContext.signout(with: account, signoutParameters: signoutParameters) { (_, error) in
-            if let error = error {
-                self.msAuthState.logMessage = "Couldn't sign out account with error: \(error)"
-                return
-            }
-
-            self.msAuthState.logMessage = "Sign out completed successfully"
-            self.accessToken = ""
-            self.msAuthState.currentAccount = nil
-        }
-    }
-    
-    func getDeviceMode() {
-        self.applicationContext?.getDeviceInformation(with: nil) { (deviceInformation, error) in
-            
-            guard let deviceInfo = deviceInformation else {
-                self.msAuthState.logMessage = "Device info not returned. Error: \(String(describing: error))"
-                return
-            }
-            
-            let deviceMode = deviceInfo.deviceMode == .shared ? "shared" : "private"
-            self.msAuthState.logMessage = "Received device info. Device is in the \(deviceMode) mode."
+            Logger.msAuthentication.debug("Sign out completed successfully")
+            self.resetState()
         }
     }
 
     func openUrl(url: URL) {
-        // as the onOpenURL modifier does not provide a sourceApplication, i set it to nil.
-        // Though I think opening the app with a link is not necessary for this example
-        MSALPublicClientApplication.handleMSALResponse(url, sourceApplication: nil)
+        msAuthProxy.openUrl(url: url)
+    }
+    
+    private func setupApplicationContext() {
+        guard let authorityURL = URL(string: msAuthority) else {
+            Logger.msAuthentication.error("Unable to create authority URL")
+            return
+        }
+        
+        do {
+            try msAuthProxy.setupApplicationContext(msAuthorityUrl: authorityURL, msRedirectUri: msRedirectUri)
+        } catch let error {
+            Logger.msAuthentication.error("Unable to create Application Context: \(String(describing: error))")
+        }
+    }
+    
+    private func loadAccount(completion: ((Account?) -> Void)? = nil) {
+        msAuthProxy.loadAccount { account, error in
+            if let error = error {
+                Logger.msAuthentication.error("Couldn't query current account with error: \(String(describing: error))")
+                return
+            }
+
+            if let account = account {
+                Logger.msAuthentication.error("Found a signed in account \(account.email ?? ""). Updating data for that account...")
+                completion?(account)
+                return
+            }
+
+            Logger.msAuthentication.debug("Account signed out.")
+            self.resetState()
+            completion?(nil)
+        }
+    }
+    
+    private func resetState() {
+        setAccount(nil)
+    }
+    
+    private func setAccount(_ account: Account?) {
+        DispatchQueue.main.async {
+            self.appState.account = account
+        }
     }
 
     private func acquireTokenInteractively() {
-        guard let applicationContext = self.applicationContext else { return }
-        guard let webViewParameters = self.webViewParamaters else { return }
-
-        let parameters = MSALInteractiveTokenParameters(scopes: msScopes, webviewParameters: webViewParameters)
-        parameters.promptType = .selectAccount
-
-        applicationContext.acquireToken(with: parameters) { (result, error) in
+        msAuthProxy.acquireTokenInteractively(msScopes: msScopes) { account, accessToken, error in
             if let error = error {
-                self.msAuthState.logMessage = "Could not acquire token: \(error)"
+                Logger.msAuthentication.error("Could not acquire token: \(String(describing: error))")
                 return
             }
 
-            guard let result = result else {
-                self.msAuthState.logMessage = "Could not acquire token: No result returned"
+            guard let account = account, let accessToken = accessToken  else {
+                Logger.msAuthentication.error("Could not acquire token: No result returned")
                 return
             }
 
-            self.accessToken = result.accessToken
-            self.msAuthState.logMessage = "Access token is \(self.accessToken)"
-            self.msAuthState.currentAccount = result.account
-            self.getContentWithToken()
+            self.accessToken = accessToken
+            Logger.msAuthentication.debug("Aquired access token interactively")
+            self.setAccount(account)
+            self.loadContentWithToken(accessToken: accessToken)
         }
     }
 
-    private func acquireTokenSilently(_ account: MSALAccount!) {
-        guard let applicationContext = applicationContext else { return }
-
-        let parameters = MSALSilentTokenParameters(scopes: msScopes, account: account)
-
-        applicationContext.acquireTokenSilent(with: parameters) { (result, error) in
-
+    private func acquireTokenSilently() {
+        msAuthProxy.acquireTokenSilently(msScopes: msScopes) { account, accessToken, error in
             if let error = error {
-                let nsError = error as NSError
-                if nsError.domain == MSALErrorDomain && nsError.code == MSALError.interactionRequired.rawValue {
+                if let error = error as? MSAuthError, error == .interactiveLoginRequired {
                     DispatchQueue.main.async {
                         self.acquireTokenInteractively()
                     }
-                    return
+                } else {
+                    Logger.msAuthentication.error("Could not acquire token silently: \(String(describing: error))")
                 }
-
-                self.msAuthState.logMessage = "Could not acquire token silently: \(error)"
                 return
             }
 
-            guard let result = result else {
-                self.msAuthState.logMessage = "Could not acquire token: No result returned"
+            guard let account = account, let accessToken = accessToken else {
+                Logger.msAuthentication.error("Could not acquire token: No result returned")
                 return
             }
 
-            self.accessToken = result.accessToken
-            self.msAuthState.logMessage = "Refreshed Access token is \(self.accessToken)"
-            self.getContentWithToken()
+            self.accessToken = accessToken
+            self.setAccount(account)
+            self.loadContentWithToken(accessToken: accessToken)
+            Logger.msAuthentication.debug("Refreshed Access token")
+        }
+    }
+    
+    func loadDeviceMode() {
+        msAuthProxy.deviceMode { deviceMode, error in
+            if let deviceMode = deviceMode {
+                Logger.msAuthentication.log("Received device info. Device is in the \(deviceMode) mode.")
+            } else {
+                Logger.msAuthentication.error("Device info not returned. Error: \(String(describing: error))")
+            }
         }
     }
 
-    private func getContentWithToken() {
-        var request = URLRequest(url: URL(string: msGraphEndpoint)!)
+    private func loadContentWithToken(accessToken: String) {
+        var request = URLRequest(url: URL(string: msGraphEndpoint + "/v1.0/me/")!)
 
         request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
 
         URLSession.shared.dataTask(with: request) { data, _, error in
             if let error = error {
-                self.msAuthState.logMessage = "Couldn't get graph result: \(error)"
+                Logger.msAuthentication.error("Couldn't get graph result: \(String(describing: error))")
                 return
             }
 
             guard let result = try? JSONSerialization.jsonObject(with: data!, options: []) else {
 
-                self.msAuthState.logMessage = "Couldn't deserialize result JSON"
+                Logger.msAuthentication.error("Couldn't deserialize result JSON")
                 return
             }
 
-            self.msAuthState.logMessage = "Result from Graph: \(result))"
+            Logger.msAuthentication.log("Result from Graph: \(String(describing: result)))")
         }.resume()
     }
 }
 
-private func topViewController() -> UIViewController? {
-    let window = UIApplication.shared.windows.filter { $0.isKeyWindow }.first
-    let rootVC = window?.rootViewController
-    return rootVC?.top()
-}
 
-private extension UIViewController {
-    func top() -> UIViewController {
-        if let nav = self as? UINavigationController {
-            return nav.visibleViewController?.top() ?? nav
-        } else if let tab = self as? UITabBarController {
-            return tab.selectedViewController ?? tab
-        } else {
-            return presentedViewController?.top() ?? self
-        }
-    }
-}

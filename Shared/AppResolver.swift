@@ -11,7 +11,8 @@ import Resolver
 extension Resolver: ResolverRegistering {
     public static func registerAllServices() {
         register { MSAuthState() }.scope(.application)
-        register { MSAuthAdapter() }.scope(.application)
+        register { MSAuthAdapter() as MSAuthAdapterProtocol }.scope(.application)
+        register { MSAuthProxy() as MSAuthProxyProtocol }.scope(.application)
     }
 }
 

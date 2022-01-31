@@ -6,9 +6,11 @@
 //
 
 import Foundation
-import MSAL
 
 class MSAuthState: ObservableObject {
-    @Published var currentAccount: MSALAccount?
-    @Published var logMessage = ""
+    @Published var account: Account?
+}
+
+struct Account: Equatable {
+    let email: String?
 }
